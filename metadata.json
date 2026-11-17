@@ -1,0 +1,8 @@
+{
+  "name": "MeasureSheet",
+  "description": "Offline measurement calculator and A4 PDF sheet generator for contractors, fabricators, and estimators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
