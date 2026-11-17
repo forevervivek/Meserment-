@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Source Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Java 17
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -27,19 +27,17 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.13'
 
-      - name: Build Debug APK
+      - name: Update Gradle Wrapper
         run: |
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-            ./gradlew :app:assembleDebug
-          else
-            gradle :app:assembleDebug
-          fi
+          sed -i 's/gradle-[0-9.]*-bin.zip/gradle-9.3.1-bin.zip/' gradle/wrapper/gradle-wrapper.properties
 
-      - name: Upload Meserment APK
+      - name: Build APK
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :app:assembleDebug
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Meserment-Android-APK
